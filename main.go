@@ -5,6 +5,7 @@
 	// Arrays & Slices 
 	// Print Functions of different types (Print, Println, Printf)
 	// User input (Scan)
+	// For loops (infinite)
 
 
 // Package for the main function
@@ -34,37 +35,41 @@ func main() {
 	// We could also declare the array as:
 		// var randArray [3]string
 	
-	// the use of Print vs Println is as follows:
-		// "Print" doesnt print a new line whereas Println displays the contents within the parenthesis 
-		// Print is ideal for user prompts such as the example below
-	fmt.Print("What's your name: ")
-	//Scan assumes the repsonse and initiates the variable earlier declared with the value typed by the user
-	fmt.Scan(&userName)
+	// Here we use the for loop
+	for {
+		// the use of Print vs Println is as follows:
+			// "Print" doesnt print a new line whereas Println displays the contents within the parenthesis 
+			// Print is ideal for user prompts such as the example below
+		fmt.Print("What's your name: ")
+		//Scan assumes the repsonse and initiates the variable earlier declared with the value typed by the user
+		fmt.Scan(&userName)
 
-	// Printf is ideal when you want to format numbers variables/ strings. It's use case is exampled below.
-	fmt.Printf("Asalamu Alaykum %v, welcome to %v. There are %v available rooms.\n", userName, hotelName, remainingRooms)
-	
+		// Printf is ideal when you want to format numbers variables/ strings. It's use case is exampled below.
+		fmt.Printf("Asalamu Alaykum %v, welcome to %v. There are %v available rooms.\n", userName, hotelName, remainingRooms)
+		
 
-	fmt.Print("How many rooms would you like to book: ")
-	fmt.Scan(&userRooms)
+		fmt.Print("How many rooms would you like to book: ")
+		fmt.Scan(&userRooms)
 
-	// App logic
-	remainingRooms = remainingRooms - userRooms
-	// Slice usage 
-		// You can see in the Slice you use the methods "append"
-			// This is the dynamic alternative to the array as the Slice 
-			// will assume assign the element to the index of the Slice
-	booking = append(booking, "This is a Slice: " + userName + " " + hotelName)
+		// App logic
+		remainingRooms = remainingRooms - userRooms
+		// Slice usage 
+			// You can see in the Slice you use the methods "append"
+				// This is the dynamic alternative to the array as the Slice 
+				// will assume assign the element to the index of the Slice
+		booking = append(booking, "This is a Slice: " + userName + " " + hotelName)
 
-	// Array usage 
-		// In the array you must statically input each and every one element of the array
-			// explicitly specifiying its index
-	randArray[0] = "This is an array: " + userName + " " + hotelName
+		// Array usage 
+			// In the array you must statically input each and every one element of the array
+				// explicitly specifiying its index
+		randArray[0] = "This is an array: " + userName + " " + hotelName
 
-	// Print to screen
-	fmt.Printf("User: %v, booked %v rooms. There are now %v rooms remaining.\n", userName, userRooms, remainingRooms)
-	// Calling the array is the same as calling a slice or a variable within the fmt.Print function
-	fmt.Printf("Booking Slice: %v,\n", booking)
-	fmt.Printf("Booking Array: %v,\n", randArray)
+		// Print to screen
+		fmt.Printf("User: %v, booked %v rooms. There are now %v rooms remaining.\n", userName, userRooms, remainingRooms)
+		// Calling the array is the same as calling a slice or a variable within the fmt.Print function
+		fmt.Printf("Booking Slice: %v,\n", booking)
+		fmt.Printf("Booking Array: %v,\n", randArray)
+
+	}
 
 }
