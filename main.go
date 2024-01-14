@@ -1,3 +1,12 @@
+// This code is messy, this is because it is a demo.
+// we deliberarely use most the main components of a language, these are:
+	// Variables of different data types,
+	// Packages & imports
+	// Arrays & Slices 
+	// Print Functions of different types (Print, Println, Printf)
+	// User input (Scan)
+
+
 // Package for the main function
 package main
 // Import the fmt function
@@ -13,13 +22,17 @@ func main() {
 	// To declare a var without a value we need to specify its data type
 	var userName string
 	var userRooms int
-	// Slice
-	var booking []string
+	// Slice (an empty slice)
+	booking := []string{}
+	// We could also declare the slice as:
+		// var booking []string
 
 	// Array (the difference between array and a slice):
 		// 1. You need to explicitly specify the number of elements in the array
 		// 2. The way you append a n array/ slice
-	var randArray [3]string
+	randArray := [3]string{}
+	// We could also declare the array as:
+		// var randArray [3]string
 	
 	// the use of Print vs Println is as follows:
 		// "Print" doesnt print a new line whereas Println displays the contents within the parenthesis 
