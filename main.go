@@ -11,7 +11,10 @@
 // Package for the main function
 package main
 // Import the fmt function
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // Entry point of the code via main func
 func main() {
@@ -22,6 +25,7 @@ func main() {
 	var remainingRooms = 30
 	// To declare a var without a value we need to specify its data type
 	var userName string
+	var sureName string
 	var userRooms int
 	// Slice (an empty slice)
 	booking := []string{}
@@ -31,7 +35,7 @@ func main() {
 	// Array (the difference between array and a slice):
 		// 1. You need to explicitly specify the number of elements in the array
 		// 2. The way you append a n array/ slice
-	randArray := [3]string{}
+	//randArray := [3]string{}
 	// We could also declare the array as:
 		// var randArray [3]string
 	
@@ -44,8 +48,12 @@ func main() {
 		//Scan assumes the repsonse and initiates the variable earlier declared with the value typed by the user
 		fmt.Scan(&userName)
 
+		fmt.Print("What is your surename: ")
+		// surename
+		fmt.Scan(&sureName)
+
 		// Printf is ideal when you want to format numbers variables/ strings. It's use case is exampled below.
-		fmt.Printf("Asalamu Alaykum %v, welcome to %v. There are %v available rooms.\n", userName, hotelName, remainingRooms)
+		fmt.Printf("Asalamu Alaykum %v %v, welcome to %v. There are %v available rooms.\n", userName, sureName, hotelName, remainingRooms)
 		
 
 		fmt.Print("How many rooms would you like to book: ")
@@ -57,18 +65,36 @@ func main() {
 			// You can see in the Slice you use the methods "append"
 				// This is the dynamic alternative to the array as the Slice 
 				// will assume assign the element to the index of the Slice
-		booking = append(booking, "This is a Slice: " + userName + " " + hotelName)
+		booking = append(booking, userName + " " + hotelName)
 
 		// Array usage 
 			// In the array you must statically input each and every one element of the array
 				// explicitly specifiying its index
-		randArray[0] = "This is an array: " + userName + " " + hotelName
+		//randArray[0] = "This is an array: " + userName + " " + hotelName
+
+		firstNames := []string{}
+		// Here we use a loop that iterates through the index of 
+		// the "booking" slice
+		// the _ is used in go to declare an unused variable so the compiler doesn't complain
+
+		for _, book := range booking {
+			// strings.Fields splits the variable with a space as a seperator
+			// returns a slice with the split element
+			var name = strings.Fields(book)
+			// the newly declared slice "firstNames" is appended with the value of 
+			// index 0 of the names slice, which is the first name of our user
+			firstNames = append(firstNames, name[0])
+ 
+		}
+
+		// firstName = append
 
 		// Print to screen
 		fmt.Printf("User: %v, booked %v rooms. There are now %v rooms remaining.\n", userName, userRooms, remainingRooms)
 		// Calling the array is the same as calling a slice or a variable within the fmt.Print function
-		fmt.Printf("Booking Slice: %v,\n", booking)
-		fmt.Printf("Booking Array: %v,\n", randArray)
+		fmt.Printf("Customer List: %v,\n", firstNames)
+		//Calling an array:
+		//fmt.Printf("Booking Array: %v,\n", randArray)
 
 	}
 
