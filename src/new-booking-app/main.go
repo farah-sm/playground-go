@@ -13,6 +13,7 @@ func main() {
 	*i = 22
 
 
-
+	// the value of p is now 22 (after line 13), j is still 55
+	// and the value of the i is still the hexadecimal memory location of the variable p
 	fmt.Print(p, j, i)
 }
