@@ -1,20 +1,79 @@
 package main
 
-
-import "fmt"
+import (
+	"fmt"
+	"strings"
+	"new-booking-app/helper"
+)
+var greeting = "Go conference"
+const confTickets = 50
+var remainTickets uint = 50
+var bookings = []string{}
 
 func main() {
+
+
+	greetUser()
+
+	for {
+
+		firstName, lastName, email, userTickets := getUserInput() 
+
+		isValidName, isValidEmail, isValidTickets := helper.ValidateUserInput(firstName, lastName, email, int(userTickets), remainTickets)
+
+		if isValidName && isValidEmail && isValidTickets {
+
+			// book ticket
+			bookTicket(userTickets, firstName, lastName, email)
+
+			if remainTickets == 0 {
+				// end program
+				fmt.Println("Our conference is booked out. Please try again next year.")
+				break
+			}
+
+		} else {
+
+			if !isValidName {
+				fmt.Println("Incorrect Name")
+			}
+			if !isValidTickets {
+				fmt.Println("Incorrect Ticket")
+			}
+			if !isValidEmail {
+				fmt.Println("Incorrect Email")
+			}
+			// skips all the follwong code, but goes to the next iteration of the loop.
+			// continue
+		}
+
+	}
+}
+
+func greetUser() {
+	fmt.Printf("Welcome to %v, we hope you enjoy your time here\n", greeting)
+	fmt.Printf("There are %v in total. There are: %v remaining.\n", confTickets, remainTickets)
+}
+
+func getFirstNames() []string {
+	firstNames := []string{}
+
+	// this is a for each loop, taking both the index and the value of the slice
+	for _, booking := range bookings {
+		// we split the booking variable (full name of the user), and store it in a 'name' slice
+		var name = strings.Fields(booking)
+		firstNames = append(firstNames, name[0])
+	}
+	return firstNames
+}
+
+func getUserInput() (string, string, string, uint) {
+
 	var firstName string
 	var lastName string
 	var email string
-	var userTickets int
+	var userTickets uint
 
-	greeting := "Go conference"
-	const confTickets = 50
-	var remainTickets uint = 50
-
-	
-	
 	fmt.Print("What is your first name: ")
 	fmt.Scan(&firstName)
 
@@ -27,12 +86,19 @@ func main() {
 	fmt.Print("How many tickets would you like: ")
 	fmt.Scan(&userTickets)
 
-	remainTickets = remainTickets - uint(userTickets)
+	return firstName, lastName, email, userTickets
+}
 
-	fmt.Printf("Welcome to %v, we hope you enjoy your time here\n", greeting)
-	fmt.Printf("There are %v in total. There are: %v remaining.\n", confTickets, remainTickets)
+func bookTicket(userTickets uint, firstName string, lastName string, email string ) {
 
+	remainTickets = uint(remainTickets) - uint(userTickets)
 
+	bookings = append(bookings, firstName+" "+lastName)
+
+	// we take the return value of the function 'getFirstNames' and store it in a variable
+	firstNames := getFirstNames()
+
+	fmt.Printf("The first names of our users are: %v\n", firstNames)
 	fmt.Printf("Thank you %v %v for buying: %v tickets. You will recieve a confirmation email at: %v. There are now %v tickets remaining\n", firstName, lastName, userTickets, email, remainTickets)
 
 }

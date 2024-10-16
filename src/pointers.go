@@ -1,8 +1,6 @@
 package main
 
-
 import "fmt"
-
 
 func main() {
 	p, j := 0, 55
