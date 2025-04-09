@@ -1,5 +1,8 @@
 package main
 
+package main
+
+
 import (
 	// "k8s.io/client-go/tools/clientcmd"
 	// "k8s.io/client-go/util/homedir"
@@ -12,10 +15,10 @@ import (
 )
 
 
+
 func main() {
 
 	var files []os.FileInfo
-
 	fileName := flag.String("file", "", "Filename pattern we're looking for, default is kubeconfig")
 	startPath := flag.String("path", "/", "Where shall we scan, default is root")
 	flag.Parse()
@@ -41,6 +44,11 @@ func main() {
             println(f.Name())
             // This is where we'd like to open the file
         }
+
+
+}
+
+}
 
 
 }
