@@ -1,0 +1,10 @@
+#!/bin/bash
+
+i=0
+
+while test $i -lt 100
+do
+
+	echo "Asalamu alaykum"
+((i=$i+1))	
+done
