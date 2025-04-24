@@ -12,25 +12,28 @@ func main() {
 	// Flag for the username in question
 	user := flag.String("user", "me", "Username in question")
 	flag.Parse()
-	prefix := "https://"
-	fullPath := make(map[string]int)
+	//fullPath := make(map[string]int)
 
-	platform := map[string]int{
-		"instagram.com":1,
-		"facebook.com":2,
-		"linkedin.com/in":3,
-		"tiktok.com":4,
+	fmt.Printf("Searching the web, hang tight...\n\n")
+
+	platform := map[string]string{
+		"Instagram":"https://www.instagram.com/",
+		"Facebook":"https://www.facebook.com/",
+		"YouTube":"https://www.youtube.com/user/",
+		"Reddit":"https://www.reddit.com/user/",
+		"GitHub":"https://www.github.com/",
+		"Twitch":"https://www.twitch.tv/",
+		"Pinterest":"https://www.pinterest.com/",
+		"TikTok":"https://www.tiktok.com/@",
+		"Flickr":"https://www.flickr.com/photos/",
 	}
+	var url string
 
-	for p, _ := range platform {
-		holder := prefix + p + "/" + *user
-
-		fullPath[holder]++
-	}
-
-
-	// HTTP GET
-	for url, _ := range fullPath {
+	for platform, link := range platform { {
+		url = link + *user
+		//fmt.Printf("\nURL IS: %s\n", url)
+		// url := fullPath[holder]++
+		// fmt.Printf("%s\n", holder)
 		resp, err := http.Get(url)
 		// handle the err
 		if err!= nil{
@@ -40,14 +43,21 @@ func main() {
 		status := resp.Status
 
 		if strings.Contains(status, "200") {
-			fmt.Printf("Success! Code: %s ", status)
-			fmt.Printf("HIT: %s is a valid URL with %s\n", *user, url)
+			fmt.Printf("❌ %s: @%s is unavailable. URL: %s. Status: %s\n", platform, *user, url, status)
 
+		} else if strings.Contains(status, "404") {
+			fmt.Printf("✅ %s: @%s is available. URL %s. Status: %s\n", platform, *user, url, status)
 		} else {
-			fmt.Printf("Unsuccessful! Code: %s ", status)
-			fmt.Printf("NOT A HIT: %s is an invalid URL with %s\n", *user, url)
+			fmt.Printf("🤔 %s @%s is unclear if available. URL %s. Status: %s\n", platform, *user, url, status)
 		}
-
+		
 	}
+}
+
+
+	// HTTP GET
+
+
+	
 
 }
