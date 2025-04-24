@@ -1,0 +1,1 @@
+{"success":true,"base":"XAU","timestamp":1745452799,"rates":{"USD":3338.6584936307,"XAUUSD":0.0002995215}}
