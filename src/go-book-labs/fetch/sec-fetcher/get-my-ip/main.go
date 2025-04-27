@@ -14,8 +14,6 @@ import (
 func main() {
 	api := os.Getenv("API")
 
-
-
 	// url := fmt.Sprintf("https://api.shodan.io/shodan/host/%s?key=%s", *ip, api)
 
 	url := fmt.Sprintf("https://api.shodan.io/tools/myip?key=%s", api)
