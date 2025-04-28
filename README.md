@@ -1,4 +1,4 @@
-# Basic Concepts in Go:
+# Basic Concepts in Go-lang:
 
 ## Print Functions:
 1. **`println` vs. `print` vs. `printf`:**
