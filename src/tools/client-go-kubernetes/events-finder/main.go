@@ -22,7 +22,7 @@ import (
 func main() {
 
 	kubeconfig := flag.String("kubeconfig", "/usr/local/google/home/saedf/.kube/config", "location of your kubeconfig file")
-	//uname := flag.String("ldap", "", "-ldap='username'")
+	msg := flag.String("msg", "", "-msg='Pulling image'")
 	flag.Parse()
 
 	// clientcmd library reads the config file and creates a configuration object 'config'
@@ -40,43 +40,9 @@ func main() {
 	ctx := context.Background()
 
 	fmt.Printf("------------------------------\n")
-
+	fmt.Printf("Event in Cluster: \n")
 	fmt.Printf("------------------------------\n")
-	get_events(clientset, ctx,"Events")
-}
 
-func get_services_external_ip(clientset *kubernetes.Clientset, ctx context.Context, name string) {
-	fmt.Printf("%s in Namespace: \n", name)
-	services, err := clientset.CoreV1().Services("").List(ctx, metav1.ListOptions{})
-
-	if err != nil {
-		fmt.Printf("error %s, listing services", err.Error())
-	}
-
-
-	for _, s := range services.Items {
-		fmt.Printf("%v\n", s.Spec.ClusterIP)
-	}
-
-}
-
-func get_pods(clientset *kubernetes.Clientset, ctx context.Context, name string) {
-	fmt.Printf("%s in Namespace: \n", name)
-	pods, err := clientset.CoreV1().Pods("").List(ctx, metav1.ListOptions{})
-
-	if err != nil {
-		fmt.Printf("error %s, listing pods from namespace", err.Error())
-	}
-
-	for _, pod := range pods.Items {
-		fmt.Printf("Pod: %v. The IP is: %v. The corresponding Node IP: %v\n", pod.Name, pod.Status.PodIP, pod.Status.HostIP)
-	}
-
-
-}
-
-func get_events(clientset *kubernetes.Clientset, ctx context.Context, name string) {
-	fmt.Printf("%s in Namespace: \n", name)
 	event, err := clientset.CoreV1().Events("").List(ctx, metav1.ListOptions{})
 
 	if err != nil {
@@ -86,12 +52,9 @@ func get_events(clientset *kubernetes.Clientset, ctx context.Context, name strin
 
 	for i, e := range event.Items {
 		i=i+1
-		
-		if strings.Contains(e.Message, "Pulling image") {
+		if strings.Contains(e.Message, *msg) {
 			fmt.Printf("\n%d)Event: %v.\nTime: %v.\nMessage: %v.\n",i, e.Name, e.EventTime, e.Message)
 		}
 	}
 }
 
-
-// where is this IP address, 
