@@ -3,21 +3,15 @@ package main
 import (
 	"context"
 	"strings"
-	//"encoding/json"
 	"flag"
 	"fmt"
 
-	//"strings"
-
-	//	"strings"
-
-	// "k8s.io/client-go" // exposes all the interfaces used by the client to interact with the API server read more: https://github.com/kubernetes/client-go
-	// "k8s.io/api" // all the kubernetes resources are interacted with by the api library
-	// "k8s.io/apiMachinery" // Access to utility methods that help developing an API
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 )
+
+// go run main.go -msg="Pulling Image" (the -msg flag is case sensitive, if you write -msg='pulling image', atm it wont pick it up but a working progress.)
 
 func main() {
 
