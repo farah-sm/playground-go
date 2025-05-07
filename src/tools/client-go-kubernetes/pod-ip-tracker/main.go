@@ -15,7 +15,11 @@ import (
 
 func main() {
 
+<<<<<<< HEAD
 	kubeconfig := flag.String("kubeconfig", "/usr/local/google/home/saedf/.kube/config", "location of your kubeconfig file")
+=======
+	kubeconfig := flag.String("kubeconfig", "/usr/local/config", "location of your kubeconfig file")
+>>>>>>> 351917a (Three new tools: ability to dynamically search multiple clusters based on different kubeconfigs, map service accounts to the roles they have and more)
 	flag.Parse()
 
 	config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
@@ -36,6 +40,12 @@ func main() {
 		fmt.Printf("error %s, listing pods from namespace", err.Error())
 	}
 	mef := make(map[string]string)
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 351917a (Three new tools: ability to dynamically search multiple clusters based on different kubeconfigs, map service accounts to the roles they have and more)
 	for _, pod := range pods.Items {
 		var b string
 		for a, r := range pod.Labels {
@@ -51,10 +61,27 @@ func main() {
 		fmt.Printf("error %s, listing services", err.Error())
 	}
 	var i string
+<<<<<<< HEAD
 	for _, s := range services.Items {
 		for a, r := range s.Spec.Selector {
 			 i = fmt.Sprintf("%s:%s", a,r)
 			for n, kv := range mef {
+=======
+	// count:=0
+
+	for _, s := range services.Items {
+
+
+		for a, r := range s.Spec.Selector {
+			 i = fmt.Sprintf("%s:%s", a,r)
+			 
+
+			for n, kv := range mef {
+
+			//	fmt.Printf("POD LABEL: %v\n", kv)
+			//	fmt.Printf("Service G: %s\n", g)
+			//	fmt.Printf("POD KV: %v\n", kv)
+>>>>>>> 351917a (Three new tools: ability to dynamically search multiple clusters based on different kubeconfigs, map service accounts to the roles they have and more)
 				if strings.Contains(kv, i) {
 					// count++
 					fmt.Println("----------------------------------")

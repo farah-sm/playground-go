@@ -2,18 +2,8 @@ package main
 
 import (
 	"context"
-	"strings"
-	//"encoding/json"
 	"flag"
 	"fmt"
-
-	//"strings"
-
-	//	"strings"
-
-	// "k8s.io/client-go" // exposes all the interfaces used by the client to interact with the API server read more: https://github.com/kubernetes/client-go
-	// "k8s.io/api" // all the kubernetes resources are interacted with by the api library
-	// "k8s.io/apiMachinery" // Access to utility methods that help developing an API
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -42,7 +32,7 @@ func main() {
 	fmt.Printf("------------------------------\n")
 
 	fmt.Printf("------------------------------\n")
-	get_events(clientset, ctx,"Events")
+	get_pods(clientset, ctx,"Pods")
 }
 
 func get_services_external_ip(clientset *kubernetes.Clientset, ctx context.Context, name string) {
@@ -74,24 +64,5 @@ func get_pods(clientset *kubernetes.Clientset, ctx context.Context, name string)
 
 
 }
-
-func get_events(clientset *kubernetes.Clientset, ctx context.Context, name string) {
-	fmt.Printf("%s in Namespace: \n", name)
-	event, err := clientset.CoreV1().Events("").List(ctx, metav1.ListOptions{})
-
-	if err != nil {
-		// handle error
-		fmt.Printf("error %s, listing pods from namespace", err.Error())
-	}
-
-	for i, e := range event.Items {
-		i=i+1
-		
-		if strings.Contains(e.Message, "Pulling image") {
-			fmt.Printf("\n%d)Event: %v.\nTime: %v.\nMessage: %v.\n",i, e.Name, e.EventTime, e.Message)
-		}
-	}
-}
-
 
 // where is this IP address, 

@@ -56,16 +56,9 @@ func main() {
 	var una string
 	//fmt.Print(string(jsonData))
 	for _, rba := range rb.Items {
-		// newRoler[rba.Subjects[0].Name]
 		if strings.Contains(string(jsonData), *uname) {
-			// fmt.Printf("In Question: %v\n\n", *uname)
-
 			una = *uname
 			roler[rba.RoleRef.Name]++
-			//fmt.Printf("Service Account: %v has the following roles: \n%v \n",*uname, rba.RoleRef.Name)
-		//	fmt.Printf("------------------------------\n")
-			// try a struct instead of a map, also looping through all roles is long, try to do a check like
-			// service account: has x roles...
 		}
 	}
 	fmt.Printf("\nFor the SA: %v\n", una)
