@@ -20,7 +20,7 @@ import (
 
 func main() {
 
-	kubeconfig := flag.String("kubeconfig", "/usr/local/google/home/saedf/.kube/config", "location of your kubeconfig file")
+	kubeconfig := flag.String("kubeconfig", "/usr/local/config", "location of your kubeconfig file")
 	flag.Parse()
 
 	// clientcmd library reads the config file and creates a configuration object 'config'
@@ -31,7 +31,7 @@ func main() {
 
 	ctx :=context.Background()
 
-	// the clientset object is the control that allows the program to interact with the API server, using the configuration parsed to it
+	// the clientset objec is the control that allows the program to interact with the API server, using the configuration parsed to it
 	discoveryClient, err := discovery.NewDiscoveryClientForConfig(config)
 	if err != nil {
 		fmt.Printf("error %s, not ble to create clientset", err.Error())
